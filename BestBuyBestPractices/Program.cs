@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 
+
 namespace BestBuyBestPractices
 {
 	class Program
@@ -38,6 +39,14 @@ namespace BestBuyBestPractices
 				Console.WriteLine("Department name?");
 				userResponse = Console.ReadLine();
 				repo.InsertDepartment(userResponse);
+			}
+
+			var repos = new DapperProductRepository(conn);
+			var products = repos.GetAllProducts();
+
+			foreach(var prod in products)
+			{
+				Console.WriteLine($"{prod.CategoryID} {prod.Name}");
 			}
 		}
 
